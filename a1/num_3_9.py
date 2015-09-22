@@ -1,30 +1,40 @@
 #!/usr/bin/env python
 import numpy as np
-'''
-Forward Substitution for Lower Triangular System LY=F
-Input L, F
-Output 	Y
-'''
 
-n = 3
+def forSub(A,b):
+    '''
+    Forward Substitution for Lower Triangular System Ax=b
+    Input A, b
+    Output x
+    '''
+    n = len(b)
+    x = np.empty(n)
+    for i in range (n) :
+        num = b[i]
+        for j in range (i) :
+            num -= A[i][j]*x[j]
+        x[i] = num / A[i][i]
 
-# Initialize L
-L = np.array(range(1,n**2+1))
-L.shape = (n,n)
-L = np.tril(L)
-print "Matrix L :\n", L
+    return x
 
-# Initialize F
-F = 2*np.array(range(1,n+1))
-print F
+n = 5
+
+# Initialize A
+A = np.array(range(1,n**2+1), dtype=float)
+A.shape = (n,n)
+A = np.tril(A)
+print "Matrix A: \n\n", A,"\n\n"
+
+# Initialize b
+b = 2*np.array(range(1,n+1), dtype=float)
+
+print "Vector b:\n\n", b,"\n\n"
 
 # Solve using NumPy's solver
-Y = np.linalg.solve(L,F)
+x_NP = np.linalg.solve(A,b)
 
-print Y
+print "NumPy Solution Y:\n\n",x_NP,"\n\n"
 
-for i in range (n) :
-    for j in range (n-n+1) :
-        Y[i]=F[i]/L[i][j]
+x = forSub(A,b)
 
-print Y       
+print "My Solution: \n\n", x
