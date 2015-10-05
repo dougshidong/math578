@@ -11,7 +11,7 @@ n = 10
 #Initial Guess
 xx = 1
 #Root
-root = 3 
+root = 10
 
 if len(sys.argv) == 2 :
     y=float(sys.argv[1])
