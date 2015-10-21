@@ -9,7 +9,8 @@ x = 0.05
 coeff = data[1,:]
 
 for k in range(n-1):
-    coeff[k+1:n] = (coeff[k+1:n] - coeff[k:n-1]) / (data[0,k+1:n] - data[0,0:n-k-1])
+    coeff[k+1:n] = (coeff[k+1:n] - coeff[k:n-1]) \
+                 / (data[0,k+1:n] - data[0,0:n-k-1])
                            
 print 'Coefficients:'        
 print coeff
