@@ -23,13 +23,16 @@ if(useInv == 1):
     Amu = A - np.identity(3) * mu
     Ainv = np.linalg.solve(Amu,np.identity(3))
 
+# Atkin Divided Difference to Speed Up Eigenvalue Convergence
 useAtkin = 0
 if(useAtkin == 1):
     at = np.empty(n)
 
+# Data Initialization
+# Eigenvectors
 x = np.empty((n,3))
 x[0] = np.array([1,1,1])
-
+# Eigenvalues
 ra  = np.empty(n)
 ra[0] = rayleigh(A,x[0])
 
