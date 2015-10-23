@@ -25,18 +25,25 @@ for i, n in enumerate(range(start,end+1,2)):
         w2[i] *= (x2-xi)
     ea[i] = abs(np.exp(-a*n))
     eb[i] = abs(np.exp(-b*n))
-    print n
-print w1
-print ea
-print w2
-print eb
-pp = PdfPages('Figures.pdf')
-plt.figure()
-w1plt = plt.semilogy(range(start,end+1,2), abs(w1), label = '$\omega = 1/(2n)$')
-eaplt = plt.semilogy(range(start,end+1,2), ea, label = '$\omega = 1/2$')
-plt.legend()
 
+pp = PdfPages('f1.pdf')
 plt.figure()
-w2plt = plt.semilogy(range(start,end+1,2), abs(w2))
-ebplt = plt.semilogy(range(start,end+1,2), eb)
-plt.show()
+w1plt = plt.semilogy(range(start,end+1,2), abs(w1), '-o', label = 'Product')
+eaplt = plt.semilogy(range(start,end+1,2), ea, '-s', label = '$e^{-an}$')
+plt.title('$\|\omega(1/(2n)\|$')
+plt.xlabel('n')
+plt.ylabel('$\omega$')
+plt.legend()
+pp.savefig()
+pp.close()
+
+pp = PdfPages('f2.pdf')
+plt.figure()
+w2plt = plt.semilogy(range(start,end+1,2), abs(w2), '-o', label = 'Product')
+ebplt = plt.semilogy(range(start,end+1,2), eb, '-s', label = '$e^{-bn}$')
+plt.title('$\|\omega(1/2)\|$')
+plt.xlabel('n')
+plt.ylabel('$\omega$')
+plt.legend()
+pp.savefig()
+pp.close()

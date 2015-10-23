@@ -8,10 +8,15 @@ def powerIt(A,x):
     y = np.dot(A,x)
     return y / np.linalg.norm(y,2)
 
+nM = 2
+
 # Matrix A
-A = np.array([[-4, 14, 0],
-               [-5, 13, 0],
-               [-1, 0 , 0]])
+#A = np.array([[-4, 14, 0],
+#               [-5, 13, 0],
+#               [-1, 0 , 0]])
+
+A = np.array([[-3, 1],
+              [ 2, 1]])
 
 # Convergence Information
 tol = 1e-14
@@ -24,21 +29,22 @@ atkinResi = 1
 useInv = 0 # Toggle on or off
 if(useInv == 1):
     mu = 3.5
-    B = A - np.identity(3) * mu
-    Binv = np.linalg.solve(B,np.identity(3))
+    B = A - np.identity(nM) * mu
+    Binv = np.linalg.solve(B,np.identity(nM))
 
 # Atkin Divided Difference to Speed Up Eigenvalue Convergence
 useAtkin = 0 # Toggle on or off
 if(useAtkin == 1):
     at = np.empty(n)
-    xn0= np.empty(3)
-    xn1= np.empty(3)
-    xn2= np.empty(3)
+    xn0= np.empty(nM)
+    xn1= np.empty(nM)
+    xn2= np.empty(nM)
 
 # Data Initialization
 # Eigenvectors
-x = np.empty((n,3))
-x[0] = np.array([1,1,1])
+x = np.empty((n,nM))
+#x[0] = np.array([1,1,1])
+x[0] = np.array([1,1])
 # Eigenvalues
 ra  = np.empty(n)
 ra[0] = rayleigh(A,x[0])
@@ -75,7 +81,7 @@ else:
     else:
         print 'Did not converge'
 
-
+print x
 print 'Took %d iterations' %i
 print 'Eigenvalue'
 if(useAtkin!=1):
