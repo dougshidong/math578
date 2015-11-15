@@ -31,7 +31,7 @@
 \usepackage[section]{placeins}
 \usepackage[font=small,skip=-2pt]{caption}
 \usepackage{subcaption}
-
+\usepackage{hyperref}
 \lstdefinestyle{mystyle}{
     %backgroundcolor=\color{backcolour},   
     %commentstyle=\color{codegreen},
@@ -106,7 +106,7 @@ Doug \textsc{Shi-Dong} % Your name
 
 \section*{Question 10}
 
-The trajectories are plotted in Figures \ref{fig:x1},\ref{fig:x2}. Notice that the Forward-Euler (FE) is not stable in both cases. The amplitude of the trajectories increase over time for FE. On the other hand, Backward-Euler (BE) seems to have a damping mechanism, decreasing the amplitude of the trajectories over time. Crank-Nicolson is neither unstable nor dissipative. A comparison of the amplitude is seen in Figure \ref{fig:r1} and \ref{fig:r2}.
+The trajectories are plotted in Figures \ref{fig:x1}, \ref{fig:x2}. Notice that the Forward-Euler (FE) is not stable in both cases. The amplitude of the trajectories increase over time for FE. On the other hand, Backward-Euler (BE) seems to have a damping mechanism, decreasing the amplitude of the trajectories over time. Crank-Nicolson is neither unstable nor dissipative. A comparison of the amplitude is seen in Figure \ref{fig:r1} and \ref{fig:r2}.
 
 Solving the second ODE with FE and BE exhibits an interesting behavior. The FE method has a greater frequency than the exact solution, whereas the BE method has a smaller frequency. Therefore, both methods cause time dilation of the solution. Crank-Nicolson is once again the same as the MATLAB computed solution.
 
@@ -249,7 +249,7 @@ Since Equation \ref{eq:ld1} is a set of strict equalities and we require a set o
 \label{eq:ld2}
 \end{equation}
 
-The resulting line is plotted in figure \ref{fig:ld} with the following parameters:
+The resulting line is plotted in Figure \ref{fig:ld} with the following parameters:
 
 \begin{equation*}
 c^T = [148.3533, -157.4198] \quad b =-22.2961 \quad \delta = 1\\
@@ -263,4 +263,9 @@ c^T = [148.3533, -157.4198] \quad b =-22.2961 \quad \delta = 1\\
     \label{fig:ld}
 \end{figure}
 
+\section*{Codes}
+
+All codes are available on my GitHub:
+
+\url{https://github.com/dougshidong/math578/tree/master/a4a5}
 \end{document}
