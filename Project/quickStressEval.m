@@ -51,6 +51,7 @@ vm_comb = squeeze( sqrt(  sxx_comb.^2 ...
                         - sxx_comb .*  syy_comb ...
                         + 3 * sxy_comb.^2 ) );
 
+max_vm = max(vm_comb)
 %% Validate with Ansys Run
 delete('file.*');delete('*.lock');delete(strcat(resultf,'.txt'));
 
@@ -68,4 +69,4 @@ FEM_data = load(strcat(resultf,'.txt'));
 stress_validate = FEM_data(:,1:5);
 stress_vm_validate = FEM_data(:,6);
 
-valid1 = vm_comb - stress_vm_validate
+valid1 = vm_comb - stress_vm_validate;
