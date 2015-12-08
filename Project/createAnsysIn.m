@@ -89,7 +89,6 @@ fprintf(Ansys_file, 'MSHKEY,0\n');
 fprintf(Ansys_file, 'AMESH,ALL\n');
 
 %% Constrain Rigid Body Motion
-
 % Ux = 0
 nUx = size(dispLocUx,1);
 for i = 1 : nUx
@@ -132,6 +131,15 @@ end
 fprintf(Ansys_file, 'NUMMRG,ALL\n');
 fprintf(Ansys_file,'ALLSEL,ALL \n');   
 
+fprintf(Ansys_file, '! Uncomment below to see better \n');
+fprintf(Ansys_file, '!/COLOR,U,RED \n');
+fprintf(Ansys_file, '!/VSCALE,ALL,2,0 \n');
+fprintf(Ansys_file, '!/REPLOT \n');
+fprintf(Ansys_file, '! Uncomment below to output EPS plot \n');
+fprintf(Ansys_file, '!/SHOW,PSCR,, \n');
+fprintf(Ansys_file, '!PSCR,COLOR,2 \n');
+fprintf(Ansys_file, '!/REPLOT \n');
+fprintf(Ansys_file, '!/ERASE \n');
 %% Solve
 
 fprintf(Ansys_file, '/SOL \n');
@@ -170,6 +178,8 @@ fprintf(Ansys_file, ['*VWRITE,s_xx(1),s_yy(1),s_xy(1),'...
 fprintf(Ansys_file, '(f20.10,f20.10,f20.10,f20.10,f20.10,f20.10) \n');
 fprintf(Ansys_file, '*CFCLOS \n');
 fprintf(Ansys_file, '*END \n');
+
+
 
 fclose(Ansys_file);
     
