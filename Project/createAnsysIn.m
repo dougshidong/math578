@@ -97,7 +97,6 @@ for i = 1 : nUx
         
     fprintf(Ansys_file,'NSEL,S,NODE,,NODE(%f,%f,0) \n',XLoc,YLoc);
     fprintf(Ansys_file,'D,ALL,UX,0 \n');
-    fprintf(Ansys_file,'D,ALL,UY,0 \n');
     fprintf(Ansys_file,'ALLSEL,ALL \n');
 end
 % Uy = 0
@@ -107,7 +106,6 @@ for i = 1 : nUy
     YLoc = dispLocUy(i,2) * H;
         
     fprintf(Ansys_file,'NSEL,S,NODE,,NODE(%f,%f,0) \n',XLoc,YLoc);
-    fprintf(Ansys_file,'D,ALL,UX,0 \n');
     fprintf(Ansys_file,'D,ALL,UY,0 \n');
     fprintf(Ansys_file,'ALLSEL,ALL \n');
 end
@@ -172,12 +170,15 @@ fprintf(Ansys_file, '*VGET,s_vm,ELEM, ,ETAB,s_vm, , ,2  \n');
 fprintf(Ansys_file, '!Uncomment below to plot VM stresses in APDL \n');
 fprintf(Ansys_file, '!PLETAB,s_vm,NOAVG \n');
 
+fprintf(Ansys_file, '*CREATE,ansuitmp \n');
 fprintf(Ansys_file, '*CFOPEN,''%s'',''txt'','' '' \n', resultf);
 fprintf(Ansys_file, ['*VWRITE,s_xx(1),s_yy(1),s_xy(1),'...
                     's_1(1),s_2(1),s_vm(1), , \n']);
 fprintf(Ansys_file, '(f20.10,f20.10,f20.10,f20.10,f20.10,f20.10) \n');
 fprintf(Ansys_file, '*CFCLOS \n');
 fprintf(Ansys_file, '*END \n');
+fprintf(Ansys_file, '/INPUT,ansuitmp \n'); 
+
 
 
 

@@ -1,16 +1,36 @@
 clear;
-project_name = 'square';
+project_name = 'beampinpin';
 load(strcat(project_name,'.mat'));
 
 
 %% List of Fx, Fy Applied on the Nodes               
-loadVal2   = [1.0000, 0.0000;
-             -1.0000, 0.0000;
-             -2.0000, 0.0000]; % N
+loadVal2   = [-0.5000, 0.0000;
+              -0.5000, 0.0000;
+              -0.5000, 0.0000;
+              -0.5000, 0.0000;
+              -0.5000, 0.0000;
+              -0.5000, 0.0000;
+              -0.5000, 0.0000;
+              -0.5000, 0.0000;
+              -0.5000, 0.0000;
+              -0.5000, 0.0000;
+              -0.5000, 0.0000;
+              0.0000, 1.0000;
+              0.0000, -2.0000]; % N
 %% Location of Loads (Non-Dimensional Location 0.0-1.0)
 loadLoc2  = [0.0, 0.0;
-             1.0, 0.9;
-             0.5, 0.0];
+             0.0, 0.1;
+             0.0, 0.2;
+             0.0, 0.3;
+             0.0, 0.4;
+             0.0, 0.5;
+             0.0, 0.6;
+             0.0, 0.7;
+             0.0, 0.8;
+             0.0, 0.9;
+             0.0, 1.0;
+             0.1, 1.0;
+             0.8, 0.0];
         
 nload = size(loadVal2, 1);
 
@@ -69,4 +89,5 @@ FEM_data = load(strcat(resultf,'.txt'));
 stress_validate = FEM_data(:,1:5);
 stress_vm_validate = FEM_data(:,6);
 
-valid1 = vm_comb - stress_vm_validate;
+valid1 = norm(vm_comb - stress_vm_validate)
+valid2 = norm(vm_comb - stress_vm_validate,inf)

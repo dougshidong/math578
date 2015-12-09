@@ -3,7 +3,7 @@
 % date: November 2015
 
 %% Defining Parameters
-project_name = 'square';
+project_name = 'beampinpin';
 ansys_path   = ['"C:\Program Files\ANSYS Inc\v162\' ...
                 'ansys\bin\winx64\ansys162.exe"'];
 work_dir     = '"C:\cygwin64\home\Doug\Math578\Project"';
@@ -24,32 +24,33 @@ nu = 0.34; % Non-dimensional
 
 %% Beam Geometry
 L  = 10;   % m
-H  = 2;    % m
+H  = 1;    % m
 A  = H * L;  % m^2
 
 %% Number of Elements Along the Length of Beam
-n     = 10;
-esize = L / n;
-nelem = round(n * H / esize);
+nx     = 100;
+esize  = L / nx;
+ny     = round(H / esize);
+nelem  = nx * ny;
 
 % Note: All specified locations are non-dimensionalized.
 %       e.g. 0.5 signifies half-way of the geometry
 
 %% Boundary Conditions
 % Fixed Ux = 0 Locations
-dispLocUx = [0.2, 0.5;
-            0.8, 0.5;];
+dispLocUx = [0.4, 0.5;
+            0.6, 0.5;];
 % Fixed Uy = 0 Locations        
-dispLocUy = [0.2, 0.5;
-            0.8, 0.5;];        
+dispLocUy = [0.4, 0.5;
+            0.6, 0.5;];        
 % Fx, Fy Applied on the Nodes               
 loadVal   = [1.0000, 0.0000;
              0.0000, 1.0000;]; % N
 
 %% Location of Loads 
 % Create a List of Load Location
-loadLocX = [0 : 1/n : 1]';
-loadLocY = [0 : 1/n : 1]';
+loadLocX = [0 : 1/nx : 1]';
+loadLocY = [0 : 1/ny : 1]';
 loadLoc  = [[zeros(size(loadLocY, 1), 1), loadLocY];
             [ ones(size(loadLocY, 1), 1), loadLocY];
             [loadLocX, zeros(size(loadLocX, 1), 1)  ];
@@ -75,7 +76,7 @@ for ifor = 1 : dim
     disp(it);
     % Create Ansys Input File
     createAnsysIn(ansys_input, resultf, ...
-                  E, nu, H, L, n, ...
+                  E, nu, H, L, nx, ...
                   dispLocUx, dispLocUy, ...
                   loadLoc(iloc, :), loadVal(ifor, :));
     % Run Ansys
