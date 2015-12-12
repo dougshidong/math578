@@ -23,9 +23,12 @@
 \usepackage[section]{placeins}
 \usepackage[font=small,skip=-2pt]{caption}
 \usepackage{subcaption}
+\usepackage{booktabs} % Tables
 \usepackage{hyperref}
 \usepackage{algorithm} 
 \usepackage{algpseudocode}
+\usepackage{pdflscape}
+
 \lstdefinestyle{mystyle}{
     %backgroundcolor=\color{backcolour},   
     %commentstyle=\color{codegreen},
@@ -70,7 +73,8 @@ Given a structure and loads, the goal is to quickly evaluate stresses in real-ti
 \end{equation}
 
 
-As it will be shown, stresses are pre-calculated for a given set of loads. The stored solutions may then be combined in real-time to estimate the current structural stress.
+As it will be shown, it is possible to evaluate complex structural problems almost instantly by combining stored solutions of simple problems. Consequently, real-time stresses can be available to the operator for in-flight testing.
+
 
 \section*{Theory}
 
@@ -118,8 +122,8 @@ Algorithm 1 and 2 outline the process. Notice that only Algorithm 1 solves for B
 \For{$iloc \gets 1,nloc$} \Comment{Loop Over Locations of Interest}
 \For{$ifor \gets 1,2$}
   \State \Call{Assign}{$F(ifor)$. $location(iloc)$}
-  \State \Call{SolveStresses}{} \Comment{Using APDL}
-  \State \Call{StoreStresses}{}
+  \State $\sigma(ifor,iloc) \gets $ \Call{SolveStresses}{} \Comment{Using APDL}
+  \State \Call{StoreStresses}{$\sigma(ifor,iloc)$}
 \EndFor
 \EndFor
 \end{algorithmic}
@@ -146,27 +150,63 @@ Algorithm 1 and 2 outline the process. Notice that only Algorithm 1 solves for B
 
 \section*{Test Case}
 
-Multiple loads are defined on the structure as shown in Figure \ref{fig:case1}. Figure \ref{fig:res1} shows the computed solution by APDL, which fully matches the results from taking a linear combination.
+Multiple loads are defined on the structure as shown in Figure \ref{fig:case1}. Figure \ref{fig:resxx1} and \ref{fig:res1} shows the computed solution by APDL, which fully matches the results from taking a linear combination. Table \ref{tab:lincomb} shows that taking the linear combination of the stored solutions give the same maximum stress $\sigma_{xx}$ of 22.4247 as solving the FEM model in Figure \ref{fig:resxx1}.
 
-\begin{figure}[h]
+\begin{table}[h]
 \centering
-\includegraphics[width=0.7\textwidth,angle=-90]{tcase000.eps}
-\caption{Test Case}
-\label{fig:case1}
-\end{figure}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.7\textwidth,angle=-90]{tcasesol.eps}
-\caption{Von Mises Stresses}
-\label{fig:res1}
-\end{figure}
+\begin{tabular}{r|rr|rr|r} \toprule
+    {$N$} & {$F_x$} & {$\sigma_{1xx}(F = (1,0))$} & {$F_y$} & {$\sigma_{2xx}(F=(0,1))$} & {$F_x\sigma_{1xx}+F_y\sigma_{2xx}$}\\ \midrule
+1 & -0.5 & -0.146913 & 0.0 & 0.269478 & 0.073457 \\
+2 & -0.5 & -0.140176 & 0.0 & 0.269478 & 0.070088 \\
+3 & -0.5 & -0.133439 & 0.0 & 0.269478 & 0.066720 \\
+4 & -0.5 & -0.126702 & 0.0 & 0.269478 & 0.063351 \\
+5 & -0.5 & -0.119965 & 0.0 & 0.269478 & 0.059983 \\
+6 & -0.5 & -0.113229 & 0.0 & 0.269478 & 0.056614 \\
+7 & -0.5 & -0.106492 & 0.0 & 0.269478 & 0.053246 \\
+8 & -0.5 & -0.099755 & 0.0 & 0.269478 & 0.049877 \\
+9 & -0.5 & -0.093018 & 0.0 & 0.269478 & 0.046509 \\
+10 & -0.5 & -0.086281 & 0.0 & 0.269478 & 0.043140 \\
+11 & -0.5 & -0.079544 & 0.0 & 0.269478 & 0.039772 \\
+12 & 0.0 & -0.079544 & 1.0 & 0.202108 & 0.202108 \\
+13 & 0.0 & -2.116161 & -2.0 & -10.799915 & 21.599831 \\
+\bottomrule
+\end{tabular}
+\caption{Linear Combination of Stress $\sigma_{xx}$ at the Location of Maximum Stress}
+\label{tab:lincomb}
+\end{table}
 
 \section*{Codes}
 
 All codes are available on GitHub.
 
 \url{https://github.com/dougshidong/math578/tree/master/Project}
+\begin{landscape}
+\newpage
+\begin{figure}[h]
+\centering
+\includegraphics[width=1.0\textwidth,angle=-90]{tcase000.eps}
+\caption{Test Case}
+\label{fig:case1}
+\end{figure}
+
+\newpage
+\begin{figure}[h]
+\centering
+\includegraphics[width=1.0\textwidth,angle=-90]{tcasesolxx.eps}
+\caption{Solution $\sigma_{xx}$}
+\label{fig:resxx1}
+\end{figure}
+
+\newpage
+\begin{figure}[h]
+\centering
+\includegraphics[width=1.0\textwidth,angle=-90]{tcasesol.eps}
+\caption{Solution $\sigma_{VM}$ Von Mises Stresses}
+\label{fig:res1}
+\end{figure}
+
+\end{landscape}
+
 
 
 \end{document}
