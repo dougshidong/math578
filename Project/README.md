@@ -6,6 +6,10 @@ The code is separated in 3 files:
 2. quickStressEval.m
 3. createAnsysIn.m
 
+## Requirements
+
+The code is written in MATLAB to write an input file for ANSYS Parametric Design Language (APDL). Therefore, a license for both applications is required.
+
 ## Instructions
 
 ### Pre-processing
