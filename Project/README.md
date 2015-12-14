@@ -1,5 +1,11 @@
 Please read the report.pdf associated with the project.
 
+The code is separated in 3 files:
+
+1. pproc.m
+2. quickStressEval.m
+3. createAnsysIn.m
+
 ## Instructions
 
 ### Pre-processing
