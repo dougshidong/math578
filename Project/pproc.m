@@ -1,6 +1,6 @@
 % Author: Doug Shi-Dong
 % email: doug.shi-dong@mail.mcgill.ca
-% date: November 2015
+% date: December 2015
 
 %% Defining Parameters
 project_name = 'beampinpin';
@@ -8,6 +8,9 @@ ansys_path   = ['"C:\Program Files\ANSYS Inc\v162\' ...
                 'ansys\bin\winx64\ansys162.exe"'];
 work_dir     = '"C:\cygwin64\home\Doug\Math578\Project"';
 ansys_input  = sprintf('%s.txt', project_name);
+% Refer to the following link to know which ansys license is used:
+% http://www.drd.com/techsupport/ansys_product_variables.aspx
+% Currently using aa_t_i (ANSYS Academic Teaching Introductory)
 ansys_run    = sprintf('%s -p aa_t_i -B -i %s -o %s.out -dir %s',...
                  ansys_path,ansys_input, project_name, work_dir);
 resultf      = 'results';
@@ -20,7 +23,7 @@ delete(strcat(project_name, '.*'));
 %% Young's Modulus and Poisson's Ratio
 % Aluminum
 E  = 9e9;   % Pa
-nu = 0.34; % Non-dimensional
+nu = 0.34;  % Non-dimensional
 
 %% Beam Geometry
 L  = 10;   % m
